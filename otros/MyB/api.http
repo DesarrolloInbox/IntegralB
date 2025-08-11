@@ -1,0 +1,66 @@
+### Login
+POST http://localhost:8000/api/login
+Content-Type: application/json
+
+{
+  "correo":     "uno01@a.com",
+  "contraseya": "Uno01qwerty"
+}
+
+### ValidaToken
+POST http://localhost:3000/api/login/validaToken
+Content-Type: application/json
+
+{
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub21icmUiOiJVc3IgMDEiLCJjb3JyZW8iOiJ1c2VyMDFAYS5jb20iLCJpYXQiOjE3MjA3NTE5ODksImV4cCI6MTcyMDc1MjU4OX0.9U1G6tMB6gsQ8QdsXlFq-qX76TRPVT4QwJqU4eUwPuI",
+    "id": "3b7fb2fa-185d-464d-a133-8c9b12265af9"
+}
+
+
+### Obtener todos los usuarios
+GET http://localhost:8000/api/usuarios
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub21icmUiOiJub21icmUgdW5vIiwiY29ycmVvIjoidW5vMDFAYS5jb20iLCJpYXQiOjE3Mjc2NTYwNDEsImV4cCI6MTcyNzY2MjA0MX0.aNAIJaIn8alle1acwgj1NO3WPdng6W0TW472hweAHn8
+
+### Obtener todos los usuarios
+GET http://localhost:3000/api/usuarios?orderby=correo&pagina=1&registros=3
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub21icmUiOiJub21icmUgdW5vIiwiY29ycmVvIjoidW5vMDFAYS5jb20iLCJpYXQiOjE3MjM5NDUzNTgsImV4cCI6MTcyMzk1MTM1OH0.Tvgz6UwdzUtPKc1VjDnZE3C8TLYnxZ_MpE-_IY0qqnE
+
+### Recuperar un usuario por el ID, se debe indicar el parámetro de obtenerSeguridad si se quieren los permisos
+GET http://localhost:3000/api/usuarios/e9f4f682-da1e-4946-b4b9-eed494fbb12f
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub21icmUiOiJub21icmUgdW5vIiwiY29ycmVvIjoidW5vMDFAYS5jb20iLCJpYXQiOjE3MjM5NTI2NzYsImV4cCI6MTcyMzk1ODY3Nn0.JeXNOXnwnPtBospNELvH014vCq3ilMqbR3FrTvrgAwM
+
+### Recuperar un usuario por el ID, se debe indicar el parámetro de obtenerSeguridad si se quieren los permisos
+GET http://localhost:3000/api/usuarios/eab53434-ab7a-4e2e-8049-09256725ad11
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub21icmUiOiJ1c3I1IiwiY29ycmVvIjoidXNyNUBhLmNvbSIsInNlZ3VyaWRhZCI6IjAxMDEwMTAxMDEwMTAxMDEwMTAxIiwiaWF0IjoxNzA5MTM1MTUxLCJleHAiOjE3MDkxMzU0NTF9.ybKJM9ilvKa1H-38Nbqk8LFtE2OSYdvbIFfru7NiUoM
+
+### Crear un usuario
+POST http://localhost:3000/api/usuarios
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub21icmUiOiJub21icmUgdW5vIiwiY29ycmVvIjoidW5vMDFAYS5jb20iLCJpYXQiOjE3MjM5NDUzNTgsImV4cCI6MTcyMzk1MTM1OH0.Tvgz6UwdzUtPKc1VjDnZE3C8TLYnxZ_MpE-_IY0qqnE
+
+{
+  "nombre": "Usuario 13",
+  "correo": "trece13@a.com",
+  "contraseya": "Trece13qwert",
+  "estado": "Actua09",
+  "seguridad": ["USR-LI", "USR-RW", "OTRO"]
+}
+
+### Actualizar un usuario
+PATCH http://localhost:3000/api/usuarios/e9f4f682-da1e-4946-b4b9-eed494fbb12f
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub21icmUiOiJub21icmUgdW5vIiwiY29ycmVvIjoidW5vMDFAYS5jb20iLCJpYXQiOjE3MjM5NTI2NzYsImV4cCI6MTcyMzk1ODY3Nn0.JeXNOXnwnPtBospNELvH014vCq3ilMqbR3FrTvrgAwM
+
+{
+  "nombre": "Usu30",
+  "correo": "usr30@a.com",
+  "contraseya": "usr300123456",
+  "estado": "Enff",
+  "seguridad": ["A", "B", "C", "D", "H", "I", "J"]
+}
+
+### Eliminar un usaurio con POST
+DELETE http://localhost:3000/api/usuarios/1d24b7cb-ab5f-47c7-880b-78a31fb945fd
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub21icmUiOiJub21icmUgdW5vIiwiY29ycmVvIjoidW5vMDFAYS5jb20iLCJpYXQiOjE3MjM5NDk2MDAsImV4cCI6MTcyMzk1NTYwMH0.o17IEXhT0OJCIsKX65CNiDmZXvmyOgrhrhysSDhmciQ
+

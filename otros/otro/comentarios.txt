@@ -1,0 +1,25 @@
+1. npm install express mongoose
+2. npm install --save-dev typescript ts-node @types/express @types/node
+3. npx tsc --init
+    crea el archivo tsconfig.json
+    poner estos cambios:
+        "target": "es2020",
+        "outDir": "./dist",
+        "rootDir": "./src",
+        "include": ["src/**/*"],
+        "exclude": [                                   /* Specify a set of files to exclude from the program. */
+            "node_modules",
+            "dist",
+                "coverage",
+                "build",
+                "scripts",
+                "test",
+                "**/*.spec.ts"
+            ],
+4. configurar el archivo package.json
+    "start": "node dist/app.js",
+    "build": "tsc",
+    "dev": "node --watch --env-file=.env -r ts-node/register ./src/app.ts"
+5. env
+    PORT=3000
+    MONGODB_URI=
