@@ -44,7 +44,7 @@ export class UsuarioModelo {
     }
   }
     
-  static async getById ({ id }: { id: string }) {
+  static async getById (id: string ) {
     try {
       let conexion = await DB.open()
       const resUsr = await conexion.all(
@@ -126,6 +126,7 @@ export class UsuarioModelo {
     } catch (e: any) {
       console.log(new Date().toString(), e, 'usuarioModel -> create', e.message)
       await DB.close()
+      // throw `Error en creafdo con ${e.message}`
       return {}
     }
   }
@@ -146,7 +147,11 @@ export class UsuarioModelo {
   }
 
   static async update ({ id, input, agregarContrasena, seguridad }: { id:string, input: Partial<Usuario>, agregarContrasena: string, seguridad?: string[] }) {
-    let usuarioModificar = await this.getById({ id })
+    let usuarioModificar = await this.getById(id)
+    if (Object.keys(usuarioModificar).length === 0) {
+      return {}
+    }
+    
     usuarioModificar = { ...usuarioModificar, ...input }
     
     const { nombre, correo, contrasena, estado } = usuarioModificar

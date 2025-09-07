@@ -5,10 +5,14 @@ import { isValidObjectId } from "mongoose";
 const lineaService = new LineaService();
 
 export const getAllLineas = async (req: Request, res: Response): Promise<void> =>{
+    // 200(OK): La solicitud se ha procesado correctamente.
+    // 204(No Content): La solicitud se ha procesado correctamente, pero no hay contenido para devolver.
+    // 404(Not Found): No se encontraron recursos que coincidan con la solicitud.
+    // 500(Internal Server Error): Error en el servidor al procesar la solicitud.
     try {
         const lineas = await lineaService.getAllLineas()
         if (lineas.length === 0) {
-            res.status(200).json({ message: "No hay lineas disponibles", data:[] });
+            res.status(204).json({ message: "No hay lineas disponibles", data:[] });
             return
         }
         res.status(200).json(lineas);
@@ -18,10 +22,15 @@ export const getAllLineas = async (req: Request, res: Response): Promise<void> =
 }
 
 export const getLineaById = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    // 200(OK): La solicitud se ha procesado correctamente.
+    // 204(No Content): La solicitud se ha procesado correctamente, pero no hay contenido para devolver.
+    // 404(Not Found): No se encontraron recursos que coincidan con la solicitud.
+    // 500(Internal Server Error): Error en el servidor al procesar la solicitud.
     const { id } = req.params;
     try {
         // if (!isValidObjectId(id)) {
         //     res.status(400).json({ message: "Invalid ID format" });       
+
         // }
         const linea = await lineaService.getLineaById(id);
         if (!linea) {
@@ -36,6 +45,10 @@ export const getLineaById = async (req: Request, res: Response, next: NextFuncti
 }
 
 export const createLinea = async (req: Request, res: Response): Promise<void> => {
+    // 201(Created): La solicitud se ha procesado correctamente y se ha creado un nuevo recurso.
+    // 204(No Content): La solicitud se ha procesado correctamente, pero no hay contenido para devolver.
+    // 400(Bad Request): La solicitud es inválida o carece de información necesaria.
+    // 500(Internal Server Error): Error en el servidor al procesar la solicitud.
     try {
         console.log(req.body);
         
@@ -47,6 +60,10 @@ export const createLinea = async (req: Request, res: Response): Promise<void> =>
 }
 
 export const updateLinea = async (req: Request, res: Response): Promise<void> => {
+    // 200(OK): La solicitud se ha procesado correctamente.
+    // 204(No Content): La solicitud se ha procesado correctamente, pero no hay contenido para devolver.
+    // 409(Conflict): La solicitud no se puede completar debido a un conflicto con el estado actual del recurso.
+    // 500(Internal Server Error): Error en el servidor al procesar la solicitud.
     const { id } = req.params;
     try {
         if (!isValidObjectId(id)) {
@@ -64,6 +81,9 @@ export const updateLinea = async (req: Request, res: Response): Promise<void> =>
 }
 
 export const deleteLinea = async (req: Request, res: Response): Promise<void> => {
+    // 204(No Content): La solicitud se ha procesado correctamente y el recurso ha sido eliminado.
+    // 404(Not Found): No se encontraron recursos que coincidan con la solicitud.
+    // 500(Internal Server Error): Error en el servidor al procesar la solicitud.
     const { id } = req.params;
     try {
         if (!isValidObjectId(id)) {
