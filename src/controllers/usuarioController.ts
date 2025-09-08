@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from "express";
-import { UsuarioModelo } from "../models/usuarioModel";
+// import { UsuarioModelo } from "../models/usuarioModel";
+import { UsuarioModelo } from "../models/usuarioModelTurso";
 import { validateUsuario, validatePartialUsuario } from '../esquemas/usuarioValidate';
 
 export const obtenerTodo = async (req: Request, res: Response) =>{
@@ -22,8 +23,7 @@ export const obtenerPorId = async (req: Request, res: Response, next: NextFuncti
     const { id } = req.params as any;
     try {
         const usuario = await UsuarioModelo.getById(id);
-        console.log('usuario', usuario);
-        if (Object.keys(usuario).length === 0) {
+        if (!usuario || Object.keys(usuario).length === 0) {
             res.status(200).json({ message: "Usuario no encontrado", estado: 0, payload:{} });
             return;
         }
@@ -47,8 +47,6 @@ export const crear = async (req: Request, res: Response) => {
         }
         res.status(201).json({ estado: 1, payload: newUsuario, message: "OK" });
     } catch (error) {
-        console.log(error);
-        
         res.status(500).json({ message: error, estado: -1, payload: null });
     }
 }
@@ -68,7 +66,7 @@ export const actualizar = async (req: Request, res: Response) => {
         const agregarContrasena = req.body.contrasena ? 'Si': 'No';
         const seguridad = req.body.seguridad ?? [];
         const updateUsuario = await UsuarioModelo.update({ id, input: req.body, agregarContrasena, seguridad });
-        if (Object.keys(updateUsuario).length === 0) {
+        if (Object.keys(updateUsuario ?? {}).length === 0) {
             res.status(404).json({ estado: 0, payload: {}, message: "Usuario no encontrado" });
             return;
         }

@@ -28,6 +28,7 @@
     "typescript": "^5.9.2"
   },
   "dependencies": {
+    "@libsql/client": "^0.15.14",
     "bcrypt": "^6.0.0",
     "express": "^5.1.0",
     "promised-sqlite3": "^2.1.0",
