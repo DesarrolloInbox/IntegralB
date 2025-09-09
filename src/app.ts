@@ -1,10 +1,13 @@
 import express from "express";
-// import connectDB from "./config/database";
+// import connectDB fro
+// m "./config/database";
 import router from "./routes/usuarioRoutes";
+import cors from 'cors'
 // import { errorHandler } from "./middlewares/errorHandler";
 
 const app = express();
 
+app.use(cors());
 app.use(express.json());
 
 app.use("/api/v1/usuarios", router);
