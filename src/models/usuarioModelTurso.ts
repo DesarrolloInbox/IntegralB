@@ -81,7 +81,7 @@ export class UsuarioModelo {
   static async getByCorreo ({ correo }: { correo: string }) {
     try {
           const { rows } = await DBTurso.execute({
-            sql: `SELECT id, nombre, correo, estado, contraseya
+            sql: `SELECT id, nombre, correo, estado, contrasena
             FROM tblusuarios WHERE correo = ?;`,
             args: [correo]
           })
@@ -102,7 +102,7 @@ export class UsuarioModelo {
             return {}
           }
         } catch (e: any) {
-          console.log(new Date().toString(), e, 'usuarioModelTurso -> getById', e.message)
+          console.log(new Date().toString(), e, 'usuarioModelTurso -> getByCorreo', e.message)
           return {}
         }
   }

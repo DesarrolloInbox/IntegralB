@@ -3,5 +3,6 @@ export interface Usuario {
   nombre: string;
   correo: string;
   contrasena: string;
-  estado: string
+  estado: string;
+  seguridad: string[];
 }

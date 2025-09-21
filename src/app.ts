@@ -1,16 +1,17 @@
 import express from "express";
-// import connectDB fro
-// m "./config/database";
 import router from "./routes/usuarioRoutes";
+import routerUsuarioLogin from "./routes/usuarioLoginRoutes";
 import cors from 'cors'
-// import { errorHandler } from "./middlewares/errorHandler";
+import { revisaToken } from './middlewares/validaToken';
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
 
+ app.use(revisaToken)
 app.use("/api/v1/usuarios", router);
+app.use("/api/v1/accesar", routerUsuarioLogin);
 // app.use(errorHandler);
 
 const PORT = process.env.PORT || 3000;
